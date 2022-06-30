@@ -12,24 +12,20 @@ function LongestPalindromicSubstring(s: string){
         rear = i;
         front = i;
 
-        // 判斷回文最中間的核心是一顆還是兩顆
-        if(front - 1 >= 0 && rear + 1 < s.length){
-            if(s[i-1] != s[i+1] && s[i+1] == s[i]){
-                rear += 1;
-            }
+        // 假設核心為一顆
+        let temp:[number, number] = getPalindromic(front, rear, s);
+        // 假設核心為兩顆
+        let temp2:[number, number] = getPalindromic(front, rear+1, s);
+        if((temp[1] - temp[0]) >= (temp2[1] - temp2[0])){
+            front = temp[0];
+            rear = temp[1];
         }
+        else{
+            front = temp2[0];
+            rear = temp2[1];
+        }
+        console.log(front,rear)
         
-        while(front - 1 >= 0 && rear + 1 < s.length){
-            // 如果前面的字元跟後面的相等,那就擴展字串
-            if(s[rear + 1] == s[front - 1]){
-                rear += 1;
-                front -= 1;
-            }
-            //如果都不相等，則結算看看是否有比歷史的字串還要大
-            else{
-                break;
-            }
-        }
         
         if(max < rear - front + 1){
             result = [front, rear];
@@ -41,5 +37,25 @@ function LongestPalindromicSubstring(s: string){
     return returnStr;
 }
 
-console.log(LongestPalindromicSubstring("aavdaawaadwva"));
-console.log(LongestPalindromicSubstring("vaav"));
+function getPalindromic(front: number, rear: number, s: string): [number,number]{
+    if(s[front] != s[rear]){
+        return [front, rear-1];
+    }
+    while(front - 1 >= 0 && rear + 1 < s.length){
+        // 如果前面的字元跟後面的相等,那就擴展字串
+        if(s[rear + 1] == s[front - 1]){
+            rear += 1;
+            front -= 1;
+        }
+        //如果都不相等，則結算看看是否有比歷史的字串還要大
+        else{
+            break;
+        }
+    }
+    return [front, rear];
+}
+
+// console.log(LongestPalindromicSubstring("aavdaawaadwva"));
+// console.log(LongestPalindromicSubstring("vaav"));
+// console.log(LongestPalindromicSubstring("aaaa"));
+console.log(LongestPalindromicSubstring("cbbd"));
