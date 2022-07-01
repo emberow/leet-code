@@ -1,7 +1,6 @@
 function subsets(nums: number[]): number[][] {
     let result:number[][] = [];
-    let curNums:number[] = [];
-    getSubsets(result, nums, curNums, 0);
+    getSubsets(result, nums, [], 0);
     return result;
 };
 
@@ -10,6 +9,7 @@ function subsets(nums: number[]): number[][] {
 // curNums:目前的數字集合
 // cur:目前數到哪個數字
 function getSubsets(result: number[][], nums: number[], curNums: number[], cur: number){
+    // 用來深拷貝
     let copy = curNums.map(x => x);
     result.push(copy);
     // console.log(curNums)
