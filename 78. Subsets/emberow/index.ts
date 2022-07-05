@@ -20,4 +20,4 @@ function getSubsets(result: number[][], nums: number[], curNums: number[], cur: 
     }
 }
 
-console.log(subsets([1,2,3]));
+console.log(subsets([1,2,2]));
