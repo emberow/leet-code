@@ -3,7 +3,6 @@ use stack to store the other side of the brackets, and force next value must be 
 ``` typescript
 function isValid(s: string): boolean {
     let array = new Array();
-    if (s.length == 1) return false;
     for (let i = 0; i < s.length; i++) {
         let c = s[i];
         if (c == '{') {
